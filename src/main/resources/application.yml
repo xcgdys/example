@@ -1,0 +1,59 @@
+server:
+    port: 8080
+    context-path: /example
+
+logging:
+    level:
+        tk.mybatis: TRACE
+
+#druid:
+#    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8
+#    username: root
+#    password: root
+#    initial-size: 1
+#    min-idle: 1
+#    max-active: 20
+#    test-on-borrow: true
+
+spring:
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        minIdle: 1
+        maxActive: 20
+        initialSize: 1
+        timeBetweenEvictionRunsMillis: 3000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 'x' FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+    mvc:
+        view:
+            prefix: /templates/
+            suffix: .ftl
+    freemarker:
+        cache: false
+        requestContextAttribute: request
+#        allow-request-override: true
+#        exposeRequestAttributes: true
+#        exposeSessionAttributes: true
+
+
+mybatis:
+    typeAliasesPackage: com.helloworld.example.bean
+    mapperLocations: classpath:mapper/*.xml
+
+
+mapper:
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
